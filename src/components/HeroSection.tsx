@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Phone } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { AuroraBackground } from "@/components/AuroraBackground";
 
 const E = [0.23, 1, 0.32, 1] as [number, number, number, number];
 
@@ -94,45 +95,13 @@ export function HeroSection() {
       className="relative min-h-dvh flex flex-col justify-end overflow-hidden"
       aria-label="Hero"
     >
-      {/* Parallax background */}
-      <div
-        ref={bgRef}
-        className="absolute will-change-transform bg-cover bg-center bg-no-repeat"
-        style={{ inset: "-20% 0 -20% 0", backgroundImage: "url('/hero.jpg')" }}
-        aria-hidden="true"
+      {/* Aurora canvas background */}
+      <AuroraBackground
+        className="absolute inset-0 z-0"
+        variant="ember"
+        speed={0.45}
+        blobCount={6}
       />
-
-      {/* Ambient orbs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-        <div
-          className="absolute rounded-full blur-[130px]"
-          style={{
-            width: 640,
-            height: 640,
-            background: "oklch(74% 0.16 85 / 0.22)",
-            top: "-12%",
-            right: "-8%",
-            animationName: "orbFloat1",
-            animationDuration: "14s",
-            animationTimingFunction: "ease-in-out",
-            animationIterationCount: "infinite",
-          }}
-        />
-        <div
-          className="absolute rounded-full blur-[180px]"
-          style={{
-            width: 500,
-            height: 500,
-            background: "oklch(74% 0.16 85 / 0.10)",
-            bottom: "8%",
-            left: "-4%",
-            animationName: "orbFloat2",
-            animationDuration: "18s",
-            animationTimingFunction: "ease-in-out",
-            animationIterationCount: "infinite",
-          }}
-        />
-      </div>
 
       {/* Gradient overlay */}
       <div
