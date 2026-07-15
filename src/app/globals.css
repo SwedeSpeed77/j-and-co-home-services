@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: oklch(8% 0.015 150);
+  --color-surface: oklch(12% 0.012 150);
+  --color-border: oklch(20% 0.01 150);
+  --color-primary: oklch(42% 0.08 145);
+  --color-accent: oklch(74% 0.16 85);
+  --color-text: oklch(93% 0.008 90);
+  --color-muted: oklch(56% 0.015 90);
+
+  --font-heading: 'Syne', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+*, *::before, *::after {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: oklch(8% 0.015 150);
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+:focus-visible {
+  outline: 2px solid oklch(74% 0.16 85);
+  outline-offset: 2px;
+}
+
+@keyframes orbFloat1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-30px, 55px) scale(1.12); }
+}
+
+@keyframes orbFloat2 {
+  0%, 100% { transform: translate(0, 0) scale(1.08); }
+  50% { transform: translate(48px, -38px) scale(0.9); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

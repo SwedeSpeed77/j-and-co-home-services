@@ -1,0 +1,12 @@
+{
+  "name": "J & Co. Home Services",
+  "short_name": "J & Co.",
+  "description": "Home organizing, junk removal, yard work, and odd jobs in Isanti, MN.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050c05",
+  "theme_color": "#c8a54a",
+  "icons": [
+    { "src": "/icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
