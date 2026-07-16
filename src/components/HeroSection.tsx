@@ -1,9 +1,7 @@
 "use client";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Phone } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { AuroraBackground } from "@/components/AuroraBackground";
 
 const E = [0.23, 1, 0.32, 1] as [number, number, number, number];
@@ -54,30 +52,8 @@ function SplitReveal({
 }
 
 export function HeroSection() {
-  const bgRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const [magnet, setMagnet] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    if (!bgRef.current || !sectionRef.current) return;
-
-    const tween = gsap.to(bgRef.current, {
-      yPercent: 18,
-      ease: "none",
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
-
-    return () => {
-      tween.kill();
-      ScrollTrigger.getAll().forEach((t) => t.kill());
-    };
-  }, []);
 
   const onMagnetMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -95,26 +71,28 @@ export function HeroSection() {
       className="relative min-h-dvh flex flex-col justify-end overflow-hidden"
       aria-label="Hero"
     >
-      {/* Aurora canvas background */}
-      <AuroraBackground
-        className="absolute inset-0 z-0"
-        variant="ember"
-        speed={0.45}
-        blobCount={6}
-      />
+      {/* Aurora — wrapped so its internal `relative` has a sized parent */}
+      <div className="absolute inset-0 z-0">
+        <AuroraBackground
+          className="w-full h-full"
+          variant="ember"
+          speed={0.45}
+          blobCount={6}
+        />
+      </div>
 
       {/* Gradient overlay */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 z-[1] pointer-events-none"
         style={{
           background:
-            "linear-gradient(to top, oklch(8% 0.015 150) 0%, oklch(8% 0.015 150 / 0.88) 38%, oklch(8% 0.015 150 / 0.35) 72%, transparent 100%)",
+            "linear-gradient(to top, oklch(8% 0.015 150) 0%, oklch(8% 0.015 150 / 0.82) 40%, oklch(8% 0.015 150 / 0.25) 75%, transparent 100%)",
         }}
         aria-hidden="true"
       />
 
+      {/* Content */}
       <div className="relative z-10 w-full">
-        {/* Main content */}
         <div className="max-w-7xl mx-auto px-6 pb-10">
           <motion.p
             className="font-body text-accent text-xs font-semibold tracking-[0.22em] uppercase mb-7"
@@ -154,7 +132,6 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: E, delay: 1.2 }}
           >
-            {/* Magnetic CTA */}
             <motion.a
               href="tel:+16514200670"
               onMouseMove={onMagnetMove}
