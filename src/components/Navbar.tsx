@@ -1,105 +1,84 @@
 "use client";
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Phone } from "lucide-react";
 
-const E = [0.23, 1, 0.32, 1] as [number, number, number, number];
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import { site, contactHref, contactLabel } from "@/lib/site";
+
+const E: [number, number, number, number] = [0.23, 1, 0.32, 1];
 
 const links = [
-  { label: "Services", href: "#services" },
-  { label: "About", href: "#about" },
-  { label: "Reviews", href: "#reviews" },
-  { label: "Contact", href: "#contact" },
+  { href: "/#services", label: "Services" },
+  { href: "/#about", label: "About" },
+  { href: "/#process", label: "Process" },
+  { href: "/#area", label: "Service Area" },
 ];
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handler, { passive: true });
-    return () => window.removeEventListener("scroll", handler);
-  }, []);
-
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        scrolled ? "bg-bg/90 backdrop-blur-md border-b border-border" : ""
-      }`}
-      aria-label="Main navigation"
-    >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16 md:h-20">
-        <a href="/" className="font-heading font-bold text-xl tracking-tight text-text">
-          J <span className="text-accent">&</span> Co.
+    <header className="sticky top-0 z-40 border-b border-line bg-bg/85 backdrop-blur-md">
+      <nav
+        aria-label="Primary"
+        className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 sm:px-8"
+      >
+        <a href="/" className="font-heading text-2xl font-semibold tracking-tight">
+          J<span className="text-gold-deep">&amp;</span>Co
+          <span className="ml-3 hidden text-[0.7rem] font-medium uppercase tracking-[0.22em] text-muted sm:inline">
+            Home Solutions
+          </span>
         </a>
 
-        <div className="hidden md:flex items-center gap-8">
+        <ul className="hidden items-center gap-9 md:flex">
           {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="text-sm font-body text-muted hover:text-text transition-colors duration-200"
-            >
-              {l.label}
-            </a>
+            <li key={l.href}>
+              <a
+                href={l.href}
+                className="text-sm uppercase tracking-[0.16em] text-muted transition-colors duration-150 hover:text-gold-deep"
+              >
+                {l.label}
+              </a>
+            </li>
           ))}
+        </ul>
+
+        <div className="flex items-center gap-2">
           <motion.a
-            href="tel:+16514200670"
+            href={contactHref}
             whileTap={{ scale: 0.97 }}
             transition={{ duration: 0.12, ease: E }}
-            className="flex items-center gap-2 bg-accent text-bg px-5 py-2.5 rounded-full text-sm font-heading font-semibold touch-manipulation min-h-[44px]"
+            className="inline-flex min-h-[44px] items-center bg-ink px-5 text-xs font-medium uppercase tracking-[0.16em] text-bg transition-colors duration-150 hover:bg-gold-deep"
           >
-            <Phone size={14} aria-hidden="true" />
-            651-420-0670
+            {contactLabel}
           </motion.a>
-        </div>
-
-        <motion.button
-          className="md:hidden text-text min-h-[44px] min-w-[44px] flex items-center justify-center touch-manipulation"
-          onClick={() => setOpen(!open)}
-          whileTap={{ scale: 0.97 }}
-          transition={{ duration: 0.12, ease: E }}
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-        >
-          {open ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
-        </motion.button>
-      </div>
-
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            id="mobile-menu"
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2, ease: E }}
-            className="md:hidden bg-bg/95 backdrop-blur-md border-b border-border px-6 pb-6"
+          <button
+            type="button"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            onClick={() => setOpen((v) => !v)}
+            className="inline-flex h-[44px] w-[44px] items-center justify-center md:hidden"
           >
-            <div className="flex flex-col gap-1 pt-4">
-              {links.map((l) => (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  className="text-muted hover:text-text transition-colors duration-200 font-body text-base min-h-[44px] flex items-center"
-                >
-                  {l.label}
-                </a>
-              ))}
+            {open ? <X aria-hidden="true" size={22} /> : <Menu aria-hidden="true" size={22} />}
+          </button>
+        </div>
+      </nav>
+
+      {open && (
+        <ul id="mobile-menu" className="border-t border-line bg-bg px-5 pb-4 md:hidden">
+          {links.map((l) => (
+            <li key={l.href} className="border-b border-line last:border-0">
               <a
-                href="tel:+16514200670"
-                className="flex items-center justify-center gap-2 bg-accent text-bg px-4 py-3 rounded-full font-heading font-semibold min-h-[44px] touch-manipulation mt-3"
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="flex min-h-[52px] items-center font-heading text-2xl"
               >
-                <Phone size={16} aria-hidden="true" />
-                651-420-0670
+                {l.label}
               </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </nav>
+            </li>
+          ))}
+        </ul>
+      )}
+    </header>
   );
 }

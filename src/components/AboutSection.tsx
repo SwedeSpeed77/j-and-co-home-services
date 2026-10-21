@@ -1,83 +1,48 @@
-"use client";
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
-import { Heart, MapPin } from "lucide-react";
+import { Reveal } from "./Reveal";
+import { site } from "@/lib/site";
 
-const E = [0.23, 1, 0.32, 1] as [number, number, number, number];
-
-const stats = [
-  { value: "Any Job", label: "No matter how big or small" },
-  { value: "Same Day", label: "We move fast when you need it" },
-  { value: "No Judgment", label: "Seen everything, judged nothing" },
-  { value: "Just Call", label: "We'll figure the rest out together" },
+const pillars = [
+  { title: "Any job", body: "If it is a home, a yard or a hard day, bring it to us." },
+  { title: "No judgment", body: "Every home has a story. We are here to help, not to comment." },
+  { title: "Just call", body: "One phone call gets you a real person and a straight answer." },
 ];
 
 export function AboutSection() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-
   return (
-    <section id="about" ref={ref} className="py-24 md:py-32 px-6 bg-surface">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -24 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, ease: E }}
-          >
-            <h2
-              className="font-heading font-bold text-text mb-8"
-              style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", lineHeight: 1 }}
-            >
-              We&apos;re Jacob<br />&amp; Jamee.
-            </h2>
-            <div className="space-y-5 font-body text-muted leading-relaxed">
-              <p>
-                We started J &amp; Co. because we genuinely love helping people.
-                We&apos;re your neighbors here in Isanti — and when someone needs a
-                hand, we want to be the first call.
-              </p>
-              <p>
-                We don&apos;t care what the job is. Hoarder cleanout, grocery run,
-                messy garage, overgrown yard — bring it. We may not always have
-                all the answers, but we&apos;ll always show up and give it everything
-                we&apos;ve got.
-              </p>
-              <p className="text-text font-medium">
-                No judgment. No hassle. Just two people who want to help.
-              </p>
-            </div>
+    <section id="about" className="scroll-mt-20 px-5 py-24 sm:px-8 sm:py-36">
+      <div className="mx-auto grid max-w-7xl gap-16 lg:grid-cols-[1fr_1.1fr] lg:gap-24">
+        <Reveal>
+          <p className="text-[0.72rem] font-medium uppercase tracking-[0.28em] text-gold-deep">
+            About us
+          </p>
+          <h2 className="mt-4 font-heading text-5xl font-semibold leading-[0.98] tracking-[-0.02em] sm:text-7xl">
+            We&rsquo;re {site.owners}.
+          </h2>
+        </Reveal>
 
-            <div className="flex flex-col sm:flex-row gap-5 mt-10">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
-                  <Heart size={15} className="text-accent" aria-hidden="true" />
-                </div>
-                <span className="font-body text-muted text-sm">Locally owned &amp; operated</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
-                  <MapPin size={15} className="text-accent" aria-hidden="true" />
-                </div>
-                <span className="font-body text-muted text-sm">Serving Isanti &amp; surrounding areas</span>
-              </div>
-            </div>
-          </motion.div>
+        <div>
+          <Reveal delay={0.05}>
+            <p className="font-heading text-2xl leading-snug sm:text-3xl">
+              J&amp;Co started with a simple idea: neighbors helping neighbors. We are a locally
+              owned and operated family business serving {site.area}.
+            </p>
+            <p className="mt-6 max-w-xl text-muted">
+              We work in the homes and yards of the people around us, so we do every job the way
+              we would want it done for our own family. Honest about what we can do, careful with
+              your space, and gone only when it is right.
+            </p>
+          </Reveal>
 
-          <div className="grid grid-cols-2 gap-4">
-            {stats.map((stat, i) => (
-              <motion.div
-                key={stat.value}
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, ease: E, delay: 0.15 + i * 0.07 }}
-                className="bg-bg border border-border rounded-xl p-6"
-              >
-                <p className="font-heading font-bold text-accent text-xl mb-1.5">{stat.value}</p>
-                <p className="font-body text-muted text-xs leading-snug">{stat.label}</p>
-              </motion.div>
+          <ul className="mt-14 grid gap-0 border-t border-gold sm:grid-cols-3">
+            {pillars.map((p, i) => (
+              <li key={p.title} className="border-b border-line py-6 sm:border-b-0 sm:py-8 sm:pr-6">
+                <Reveal delay={0.05 * i}>
+                  <h3 className="font-heading text-2xl font-semibold text-gold-deep">{p.title}</h3>
+                  <p className="mt-2 text-sm text-muted">{p.body}</p>
+                </Reveal>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </div>
     </section>

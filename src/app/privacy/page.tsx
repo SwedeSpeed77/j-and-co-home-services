@@ -1,94 +1,46 @@
 import type { Metadata } from "next";
+import { LegalPage } from "@/components/LegalPage";
+import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy | J & Co. Home Services",
-};
+export const metadata: Metadata = { title: `Privacy Policy | ${site.name}` };
 
-export default function PrivacyPage() {
+export default function Privacy() {
   return (
-    <div className="min-h-dvh px-6 py-32">
-      <div className="max-w-2xl mx-auto">
-        <h1 className="font-heading font-bold text-text mb-2" style={{ fontSize: "clamp(2rem, 5vw, 3rem)" }}>
-          Privacy Policy
-        </h1>
-        <p className="font-body text-muted text-sm mb-12">Last updated: July 2026</p>
-
-        <div className="space-y-8 font-body text-muted leading-relaxed text-base">
-          <section>
-            <h2 className="font-heading font-semibold text-text text-lg mb-3">What We Collect</h2>
-            <p>
-              When you contact us via phone or any contact form on this site, we may collect your name,
-              phone number, email address, and details about your service request. We also collect
-              standard analytics data (pages visited, time on site, device type) through our analytics
-              provider.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="font-heading font-semibold text-text text-lg mb-3">How We Use It</h2>
-            <p>
-              We use your information solely to respond to your service requests and communicate with
-              you about your job. Analytics data helps us understand how people find and use our site
-              so we can improve it.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="font-heading font-semibold text-text text-lg mb-3">Who We Share It With</h2>
-            <p>
-              We do not sell your personal information. We may share it with analytics providers
-              (e.g., Google Analytics) and any email or scheduling tools we use to manage requests.
-              These providers are bound by their own privacy policies.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="font-heading font-semibold text-text text-lg mb-3">How Long We Keep It</h2>
-            <p>
-              Contact information is retained for as long as needed to complete your service and
-              maintain business records. You may request deletion at any time.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="font-heading font-semibold text-text text-lg mb-3">Your Rights</h2>
-            <p>
-              You have the right to access, correct, or delete personal information we hold about you.
-              To make a request, contact us at{" "}
-              <a href="tel:+16514200670" className="text-accent hover:underline">651-420-0670</a>{" "}
-              or{" "}
-              <a href="mailto:Swedespeedjb@gmail.com" className="text-accent hover:underline">
-                Swedespeedjb@gmail.com
-              </a>
-              .
-            </p>
-          </section>
-
-          <section>
-            <h2 className="font-heading font-semibold text-text text-lg mb-3">Cookies</h2>
-            <p>
-              We use cookies to support analytics. You can opt out via the cookie banner on your first
-              visit. Declining cookies does not affect your ability to use this site.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="font-heading font-semibold text-text text-lg mb-3">AI Disclosure</h2>
-            <p>
-              Some content on this website was created with AI assistance and reviewed by the business
-              owner for accuracy.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="font-heading font-semibold text-text text-lg mb-3">Contact</h2>
-            <p>
-              J &amp; Co. Home Services — Isanti, MN<br />
-              <a href="tel:+16514200670" className="text-accent hover:underline">651-420-0670</a>
-            </p>
-          </section>
-        </div>
-      </div>
-    </div>
+    <LegalPage title="Privacy Policy" updated="October 19, 2026">
+      <p>
+        {site.name} (&ldquo;we&rdquo;) operates this website to share information about our home
+        services in {site.area}. This policy explains what happens to information when you visit.
+      </p>
+      <h2>What we collect</h2>
+      <p>
+        This site has no contact form, no accounts, and no analytics or advertising trackers. We do
+        not ask you to enter personal information here. If you call us, we only use what you tell
+        us to schedule and complete your job.
+      </p>
+      <h2>Hosting and third parties</h2>
+      <p>
+        Our host, Vercel, may automatically log technical information such as your IP address and
+        browser type to deliver and secure the site. The map in our Service Area section is provided
+        by Google, which may collect information when that map loads under its own privacy policy.
+      </p>
+      <h2>Cookies</h2>
+      <p>We do not set advertising or analytics cookies.</p>
+      <h2>How long we keep information</h2>
+      <p>
+        We do not store personal information collected through this website. Information you share
+        by phone is kept only as long as needed to provide our services and meet our records needs.
+      </p>
+      <h2>Your rights</h2>
+      <p>
+        You may ask what personal information we hold about you, ask us to correct or delete it, or
+        opt out of any sharing, as allowed by applicable law.
+      </p>
+      <h2>Contact</h2>
+      <p>
+        For privacy questions, call us at {site.phoneDisplay} ({site.hours}).
+      </p>
+      <h2>Changes</h2>
+      <p>If this policy changes, we will update the date at the top of this page.</p>
+    </LegalPage>
   );
 }

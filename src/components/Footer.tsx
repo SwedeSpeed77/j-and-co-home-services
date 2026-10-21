@@ -1,40 +1,54 @@
+import { site, contactHref } from "@/lib/site";
+
 export function Footer() {
   return (
-    <footer className="border-t border-border px-6 py-10">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+    <footer className="border-t border-line bg-bg px-5 pb-28 pt-14 sm:px-8 md:pb-14">
+      <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[1.3fr_1fr_1fr]">
         <div>
-          <p className="font-heading font-bold text-text text-lg mb-1">
-            J <span className="text-accent">&</span> Co. Home Services
+          <p className="font-heading text-3xl font-semibold">
+            J<span className="text-gold-deep">&amp;</span>Co
           </p>
-          <p className="font-body text-muted text-sm">
-            Isanti, MN &nbsp;·&nbsp;{" "}
-            <a href="tel:+16514200670" className="hover:text-text transition-colors duration-200">
-              651-420-0670
-            </a>
-          </p>
-          <p className="font-body text-muted text-xs mt-3 max-w-xs leading-relaxed">
-            Some content on this site was generated with AI assistance and reviewed for accuracy.
+          <p className="mt-2 text-sm text-muted">
+            {site.name}. Locally owned and operated in Isanti, MN.
           </p>
         </div>
-
-        <nav aria-label="Legal" className="flex flex-col sm:flex-row gap-4 sm:gap-6">
-          <a href="/privacy" className="font-body text-muted text-sm hover:text-text transition-colors duration-200">
-            Privacy Policy
+        <div className="text-sm">
+          <p className="text-[0.72rem] font-medium uppercase tracking-[0.2em] text-gold-deep">
+            Contact
+          </p>
+          <a
+            href={contactHref}
+            className="mt-3 inline-flex min-h-[44px] items-center font-heading text-2xl font-semibold hover:text-gold-deep"
+          >
+            {site.phoneDisplay}
           </a>
-          <a href="/terms" className="font-body text-muted text-sm hover:text-text transition-colors duration-200">
-            Terms of Service
-          </a>
-          <a href="/accessibility" className="font-body text-muted text-sm hover:text-text transition-colors duration-200">
-            Accessibility
-          </a>
+          <p className="text-muted">{site.hours}</p>
+        </div>
+        <nav aria-label="Legal" className="text-sm">
+          <p className="text-[0.72rem] font-medium uppercase tracking-[0.2em] text-gold-deep">
+            Legal
+          </p>
+          <ul className="mt-3">
+            {[
+              ["/privacy", "Privacy Policy"],
+              ["/terms", "Terms of Service"],
+              ["/accessibility", "Accessibility"],
+            ].map(([href, label]) => (
+              <li key={href}>
+                <a
+                  href={href}
+                  className="inline-flex min-h-[44px] items-center text-muted hover:text-gold-deep"
+                >
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
         </nav>
       </div>
-
-      <div className="max-w-7xl mx-auto mt-8 pt-6 border-t border-border">
-        <p className="font-body text-muted text-xs">
-          © {new Date().getFullYear()} J &amp; Co. Home Services. All rights reserved.
-        </p>
-      </div>
+      <p className="mx-auto mt-12 max-w-7xl border-t border-line pt-6 text-xs text-muted">
+        &copy; {new Date().getFullYear()} {site.name}. All rights reserved.
+      </p>
     </footer>
   );
 }

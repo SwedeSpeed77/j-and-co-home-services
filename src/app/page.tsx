@@ -1,23 +1,21 @@
-import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/HeroSection";
 import { ServicesSection } from "@/components/ServicesSection";
 import { AboutSection } from "@/components/AboutSection";
-import { ReviewsSection } from "@/components/ReviewsSection";
+import { ProcessSection } from "@/components/ProcessSection";
 import { LocationSection } from "@/components/LocationSection";
 import { CTASection } from "@/components/CTASection";
-import { Footer } from "@/components/Footer";
+import { MobileCallBar } from "@/components/MobileCallBar";
 
 export default function Home() {
   return (
     <>
-      <Navbar />
       <HeroSection />
       <ServicesSection />
       <AboutSection />
-      <ReviewsSection />
+      <ProcessSection />
       <LocationSection />
       <CTASection />
-      <Footer />
+      <MobileCallBar />
     </>
   );
 }

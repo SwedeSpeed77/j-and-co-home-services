@@ -1,57 +1,24 @@
-"use client";
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
-import { Phone } from "lucide-react";
-
-const E = [0.23, 1, 0.32, 1] as [number, number, number, number];
+import { Reveal } from "./Reveal";
+import { Button } from "./Button";
+import { site, contactHref, contactLabel } from "@/lib/site";
 
 export function CTASection() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-
   return (
-    <section ref={ref} className="py-24 md:py-32 px-6">
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, ease: E }}
-          className="border border-border rounded-2xl p-12 md:p-20 text-center relative overflow-hidden"
-        >
-          {/* Subtle warm glow */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background:
-                "radial-gradient(ellipse 60% 50% at 50% 100%, oklch(74% 0.16 85 / 0.08), transparent 70%)",
-            }}
-            aria-hidden="true"
-          />
-
-          <h2
-            className="font-heading font-extrabold text-text mb-6 relative"
-            style={{
-              fontSize: "clamp(2.2rem, 6vw, 5rem)",
-              lineHeight: 0.95,
-              letterSpacing: "-0.02em",
-            }}
-          >
-            Don&apos;t Know<br />Who Else to Call?
+    <section id="contact" className="scroll-mt-20 bg-ink px-5 py-24 text-bg sm:px-8 sm:py-40">
+      <div className="mx-auto max-w-7xl">
+        <Reveal>
+          <div className="h-px w-24 bg-gold" aria-hidden="true" />
+          <h2 className="mt-8 max-w-5xl font-heading text-[3.2rem] font-semibold leading-[0.92] tracking-[-0.03em] sm:text-[6rem] lg:text-[8rem]">
+            Don&rsquo;t know who <span className="italic text-gold">else</span> to call?
           </h2>
-          <p className="font-body text-muted text-base md:text-lg max-w-sm mx-auto mb-10 leading-relaxed relative">
-            Call us. We may not be able to help with everything, but we&apos;ll
-            always pick up and always try.
+          <p className="mt-8 max-w-lg text-lg text-bg/75">
+            Call us. We will listen, tell you honestly whether we can help, and take it from
+            there. {site.hours}.
           </p>
-          <motion.a
-            href="tel:+16514200670"
-            whileTap={{ scale: 0.97 }}
-            transition={{ duration: 0.12, ease: E }}
-            className="inline-flex items-center gap-3 bg-accent text-bg px-10 py-5 rounded-full font-heading font-bold text-lg min-h-[56px] touch-manipulation relative"
-          >
-            <Phone size={18} aria-hidden="true" />
-            651-420-0670
-          </motion.a>
-        </motion.div>
+          <div className="mt-10">
+            <Button href={contactHref}>{contactLabel}</Button>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

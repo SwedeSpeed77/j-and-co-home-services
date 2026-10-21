@@ -1,59 +1,64 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: oklch(8% 0.015 150);
-  --color-surface: oklch(12% 0.012 150);
-  --color-border: oklch(20% 0.01 150);
-  --color-primary: oklch(42% 0.08 145);
-  --color-accent: oklch(74% 0.16 85);
-  --color-text: oklch(93% 0.008 90);
-  --color-muted: oklch(56% 0.015 90);
-
-  --font-heading: 'Syne', sans-serif;
-  --font-body: 'Inter', sans-serif;
-
+  --color-bg: oklch(99% 0.005 90);
+  --color-surface: oklch(97% 0.012 88);
+  --color-ink: oklch(21% 0.02 80);
+  --color-muted: oklch(44% 0.02 80);
+  --color-line: oklch(88% 0.025 85);
+  --color-gold: oklch(76% 0.125 85);
+  --color-gold-deep: oklch(46% 0.1 78);
+  --font-heading: var(--font-cormorant), Georgia, serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
-*, *::before, *::after {
+* {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 html {
   scroll-behavior: smooth;
-  background-color: oklch(8% 0.015 150);
   overflow-x: hidden;
 }
 
 body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
   overflow-x: hidden;
 }
 
+button,
+a {
+  touch-action: manipulation;
+}
+
 :focus-visible {
-  outline: 2px solid oklch(74% 0.16 85);
-  outline-offset: 2px;
+  outline: 2px solid var(--color-gold-deep);
+  outline-offset: 3px;
 }
 
-@keyframes orbFloat1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-30px, 55px) scale(1.12); }
+::selection {
+  background: var(--color-gold);
+  color: var(--color-ink);
 }
 
-@keyframes orbFloat2 {
-  0%, 100% { transform: translate(0, 0) scale(1.08); }
-  50% { transform: translate(48px, -38px) scale(0.9); }
-}
-
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+.gold-rule {
+  height: 1px;
+  background: var(--color-gold);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
