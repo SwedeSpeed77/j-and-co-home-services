@@ -10,7 +10,7 @@ export function ServicesSection() {
             What we do
           </p>
           <h2 className="mt-4 max-w-3xl font-heading text-5xl font-semibold leading-[0.98] tracking-[-0.02em] sm:text-7xl">
-            Five ways we give you your space back.
+            Six ways we give you your space back.
           </h2>
         </Reveal>
 
